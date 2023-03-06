@@ -38,5 +38,18 @@ public class BookServiceImplementation implements BookService{
             return true;
         }).orElse(false);
     }
+
+    @Override
+    public boolean updateBook(int id, Book bookDetail) {
+        return getBookById(id).map(data ->{
+            Book book = data;
+            book.setBookName(bookDetail.getBookName());
+            book.setAuthor(bookDetail.getAuthor());
+            book.setIsbn(bookDetail.getIsbn());
+            book.setLanguaje(bookDetail.getLanguaje());
+            bookRepository.save(book);
+            return true;
+        }).orElse(false);
+    }
     
 }
